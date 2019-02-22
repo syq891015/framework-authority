@@ -114,10 +114,6 @@ export default {
         val: [
           { required: true, message: '编码是必填的', trigger: 'change' },
           { max: 100, message: '小于100个字符', trigger: 'change' }
-        ],
-        used: [
-          { required: true, message: '使用标志，1使用，0禁用是必填的', trigger: 'change' },
-          { max: 1, message: '小于1个字符', trigger: 'change' }
         ]
       }
     }

@@ -102,10 +102,6 @@ export default {
           { required: true, message: '配置值是必填的', trigger: 'change' },
           { max: 2000, message: '小于2000个字符', trigger: 'change' }
         ],
-        enabled: [
-          { required: true, message: '启用标志，1启用，0禁用是必填的', trigger: 'change' },
-          { max: 1, message: '小于1个字符', trigger: 'change' }
-        ],
         remark: [
           { max: 500, message: '小于500个字符', trigger: 'change' }
         ]

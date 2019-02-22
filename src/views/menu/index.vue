@@ -37,13 +37,13 @@
       <el-table-column :label="$t('menu.perms')" prop="perms" align="center" />
       <el-table-column :label="$t('menu.type')" align="center">
         <template slot-scope="scope">
-          <span v-if="scope.row.type === '0'">
+          <span v-if="scope.row.type === 0">
             <svg-icon icon-class="catalog" class-name="icon-lagger" />
           </span>
-          <span v-if="scope.row.type === '1'">
+          <span v-if="scope.row.type === 1">
             <svg-icon icon-class="menu1" class-name="icon-lagger" />
           </span>
-          <span v-if="scope.row.type === '2'">
+          <span v-if="scope.row.type === 2">
             <svg-icon icon-class="btn" class-name="icon-lagger" />
           </span>
         </template>

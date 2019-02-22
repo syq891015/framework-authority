@@ -26,15 +26,15 @@
       <el-table-column :label="$t('user.name')" prop="name" align="center" />
       <el-table-column :label="$t('user.sex')" align="center">
         <template slot-scope="scope">
-          <span v-if="scope.row.sex === '1'">男</span>
-          <span v-if="scope.row.sex === '2'">女</span>
+          <span v-if="scope.row.sex === 1">男</span>
+          <span v-if="scope.row.sex === 2">女</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('user.phone')" prop="phone" align="center" />
       <el-table-column :label="$t('user.status')" prop="status" align="center">
         <template slot-scope="scope">
-          <span v-if="scope.row.status === '0'">锁定</span>
-          <span v-if="scope.row.status === '1'">激活</span>
+          <span v-if="scope.row.status === 0">锁定</span>
+          <span v-if="scope.row.status === 1">激活</span>
         </template>
       </el-table-column>
       <el-table-column :label="$t('user.creator')" prop="creatorName" align="center" />
@@ -59,8 +59,9 @@
           <el-alert title="姓名是必填的；长度应小于64个字符" :closable="false" />
         </el-form-item>
         <el-form-item :label="$t('user.sex')" prop="sex">
-          <el-input v-model="temp.sex" clearable></el-input>
-          <el-alert title="长度应小于1个字符" :closable="false" />
+          <el-select v-model="temp.sex">
+            <el-option v-for="item in [{value: 1, name: '男'}, {value: 2, name: '女'}]" :label="item.name" :key="item.value" :value="item.value"></el-option>
+          </el-select>
         </el-form-item>
         <el-form-item :label="$t('user.phone')" prop="phone">
           <el-input v-model="temp.phone" clearable></el-input>
@@ -125,18 +126,8 @@ export default {
           { required: true, message: '姓名是必填的', trigger: 'change' },
           { max: 64, message: '小于64个字符', trigger: 'change' }
         ],
-        sex: [
-          { max: 1, message: '小于1个字符', trigger: 'change' }
-        ],
         phone: [
           { max: 32, message: '小于32个字符', trigger: 'change' }
-        ],
-        status: [
-          { required: true, message: '状态:0 锁定 1 激活是必填的', trigger: 'change' },
-          { max: 1, message: '小于1个字符', trigger: 'change' }
-        ],
-        deleted: [
-          { required: true, message: '删除标志，0未删除 1已删除是必填的', trigger: 'change' }
         ]
       },
       createTime: undefined

@@ -84,8 +84,7 @@ export default {
         ],
         description: [
           { max: 100, message: '小于100个字符', trigger: 'change' }
-        ],
-        creator: []
+        ]
       },
       createTime: undefined
     }
