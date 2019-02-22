@@ -37,9 +37,9 @@
           <span v-if="scope.row.status === '1'">激活</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('user.creator')" prop="creator" align="center" />
+      <el-table-column :label="$t('user.creator')" prop="creatorName" align="center" />
       <el-table-column :label="$t('user.createTime')" prop="createTime" align="center" />
-      <el-table-column :label="$t('user.modifier')" prop="modifier" align="center" />
+      <el-table-column :label="$t('user.modifier')" prop="modifierName" align="center" />
       <el-table-column :label="$t('user.modifyTime')" prop="modifyTime" align="center" />
     </el-table>
     <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.pageNum" :page-sizes="[20,30,50,100]" :page-size="listQuery.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
@@ -270,7 +270,7 @@ export default {
         })
         return
       }
-      this.$confirm('确定删除吗?', '提示', {
+      this.$confirm('确定删除吗？删除后将无法恢复！', '提示', {
         type: 'warning'
       }).then(() => {
         deleteUser(this.multipleSelection[0].id).then(response => {

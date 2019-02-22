@@ -174,7 +174,7 @@ export default {
         })
         return
       }
-      this.$confirm('确定删除吗?', '提示', {
+      this.$confirm('确定删除吗？删除后将无法恢复！', '提示', {
         type: 'warning'
       }).then(() => {
         deleteRoleMenu(this.multipleSelection[0].roleId).then(response => {
