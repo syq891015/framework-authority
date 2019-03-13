@@ -109,6 +109,9 @@ export default {
     }
   },
   created () {
+    if (window.self === window.top) {
+      location.href = 'home.html'
+    }
     this.getList()
   },
   methods: {
@@ -289,3 +292,6 @@ export default {
 }
 
 </script>
+<style>
+  @import "../../styles/content.less";
+</style>

@@ -11,6 +11,22 @@ export default {
     enable: '启用',
     disable: '禁用'
   },
+  navbar: {
+    logOut: '退出登录',
+    dashboard: '首页',
+    screenfull: '全屏',
+    screenlock: '锁屏',
+    unlockscreen: '解锁',
+    inputPassWd: '请输入密码',
+    updatePwd: '修改密码'
+  },
+  tips: {
+    tip: '提示',
+    reClickCaptcha: '看不清？点一下',
+    requireUserName: '请输入用户名',
+    requireCaptcha: '请输入验证码',
+    confirmLogOut: '确认退出吗?'
+  },
   table: {
     tableComment: '表备注',
     tableName: '表名',
@@ -69,5 +85,12 @@ export default {
     modifier: '修改人',
     modifyTime: '修改时间',
     deleted: '删除标志'
+  },
+  login: {
+    title: '系统登录',
+    logIn: '登录',
+    username: '账号',
+    password: '密码',
+    captcha: '验证码'
   }
 }

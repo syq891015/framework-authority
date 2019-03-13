@@ -38,7 +38,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
+        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'login.html') },
       ],
     },
     hot: true,
@@ -65,12 +65,12 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
+    /*new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
       chunks: ['index'],
       inject: true
-    }),
+    }),*/
     /*new HtmlWebpackPlugin({
       filename: 'baseDic.html',
       template: 'src/views/baseDic/baseDic.html',
@@ -78,14 +78,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       inject: true
     }),
     new HtmlWebpackPlugin({
-      filename: 'config.html',
-      template: 'src/views/config/config.html',
+      filename: 'navMenu.html',
+      template: 'src/views/config/navMenu.html',
       chunks: ['config'],//html需要引入的js
       inject: true
     }),
     new HtmlWebpackPlugin({
-      filename: 'dic.html',
-      template: 'src/views/dic/dic.html',
+      filename: 'login.html',
+      template: 'src/views/dic/login.html',
       chunks: ['dic'],//html需要引入的js
       inject: true
     }),

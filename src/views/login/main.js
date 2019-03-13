@@ -1,13 +1,13 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App'
+import loginApp from './index'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import i18n from '@/lang'
 import '@/styles/icon-fa.scss'
 import 'font-awesome/css/font-awesome.min.css'
-import './icons'
+import '@/icons'
 
 Vue.config.productionTip = false
 
@@ -20,6 +20,6 @@ Vue.use(ElementUI, {
 new Vue({
   el: '#app',
   i18n,
-  components: { App },
-  template: '<App/>'
+  components: { loginApp },
+  template: '<login-app/>'
 })

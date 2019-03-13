@@ -1,0 +1,45 @@
+@import './variable.less';
+html,
+body{
+  width: 100%;
+}
+body{
+  // -webkit-user-select: none;    // 禁止选中文本（如无文本选中需求，此为必选项）
+  // user-select: none;
+  font-size: 12px;
+  color: #000;
+  font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Arial,sans-serif;
+}
+select,
+input,
+textarea,
+button {
+  outline: none;
+}
+ul {
+  display: block;
+  list-style-type: none;
+}
+// a标签的处理
+a {
+  text-decoration: none;
+  cursor: pointer;
+  &:link{
+    color: #999;
+  }
+  &:visited{
+    color: #303133;
+  }
+  &:hover{
+    color: #409EFF;
+  }
+  &:active{
+    color: #409EFF;
+  }
+}
+
+/* element-ui框架的样式重写 */
+.el-step__description{
+  font-size: 14px !important;
+  color: #666 !important;
+}

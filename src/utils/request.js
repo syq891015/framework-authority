@@ -31,7 +31,12 @@ service.interceptors.response.use(
       Message({
         message: res.msg,
         type: 'error',
-        duration: 1500
+        duration: 1500,
+        onClose: () => {
+          if (res.code === 502) {
+            location.href = 'login.html'
+          }
+        }
       })
       return Promise.reject(res)
     } else {

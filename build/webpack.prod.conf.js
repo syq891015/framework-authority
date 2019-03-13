@@ -75,7 +75,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
-    new HtmlWebpackPlugin({
+    /*new HtmlWebpackPlugin({
       filename: process.env.NODE_ENV === 'testing'
         ? 'index.html'
         : config.build.index,
@@ -91,7 +91,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       },
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency'
-    }),
+    }),*/
     /*new HtmlWebpackPlugin({
       filename: 'baseDic.html',
       template: 'src/views/baseDic/baseDic.html',
@@ -106,8 +106,8 @@ const webpackConfig = merge(baseWebpackConfig, {
       chunks: ['baseDic']
     }),
     new HtmlWebpackPlugin({
-      filename: 'config.html',
-      template: 'src/views/config/config.html',
+      filename: 'navMenu.html',
+      template: 'src/views/config/navMenu.html',
       chunks: ['config'],//html需要引入的js
       inject: true,
       minify: {
@@ -117,8 +117,8 @@ const webpackConfig = merge(baseWebpackConfig, {
       }
     }),
     new HtmlWebpackPlugin({
-      filename: 'dic.html',
-      template: 'src/views/dic/dic.html',
+      filename: 'login.html',
+      template: 'src/views/dic/login.html',
       chunks: ['dic'],//html需要引入的js
       inject: true,
       minify: {
@@ -233,7 +233,7 @@ getEntry().forEach(item => {
     new HtmlWebpackPlugin({
       filename: item + '.html',
       template: 'src/views/' + item + '/' + item + '.html',
-      chunks: [item],//html需要引入的js
+      chunks: ['manifest', 'vendor', item],//html需要引入的js
       inject: true,
       minify: {
         removeComments: true,

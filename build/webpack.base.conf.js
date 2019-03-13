@@ -35,7 +35,7 @@ function getEntry () {
 
 function addEntry () {
   let entryObj = {
-    index: './src/main.js'
+    // index: './src/main.js'
   }
   getEntry().forEach(item => {
     entryObj[item] = './src/views/' + item + '/main.js'
@@ -114,6 +114,10 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: /\.less$/,
+        loader: "style-loader!css-loader!less-loader",
       }
     ]
   },
