@@ -26,19 +26,19 @@
     <el-table ref="dataTable" :data="list" v-loading="listLoading" :element-loading-text="$t('common.loadingText')" border :fit="true" highlight-current-row stripe @selection-change="handleSelectionChange" @row-click="handleRowClick" tooltip-effect="light">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column type="index" width="50" align="center" />
-      <el-table-column :label="$t('dic.baseName')" prop="baseName" align="center" />
-      <el-table-column :label="$t('dic.baseCode')" align="center">
+      <el-table-column :label="$t('dic.baseName')" prop="baseName" align="center" :render-header="labelHead"/>
+      <el-table-column :label="$t('dic.baseCode')" align="center" prop="baseCode" :render-header="labelHead">
         <template slot-scope="scope">
           <span style="cursor: pointer;" @click="handleClipboard(scope.row.baseCode,$event)">{{scope.row.baseCode}}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('dic.name')" prop="name" align="center" />
-      <el-table-column :label="$t('dic.val')" align="center">
+      <el-table-column :label="$t('dic.name')" prop="name" align="center" :render-header="labelHead"/>
+      <el-table-column :label="$t('dic.val')" align="center" prop="val" :render-header="labelHead">
         <template slot-scope="scope">
           <span style="cursor: pointer;" @click="handleClipboard(scope.row.val,$event)">{{scope.row.val}}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('dic.used')" align="center">
+      <el-table-column :label="$t('dic.used')" align="center" prop="used" :render-header="labelHead">
         <template slot-scope="scope">
           <svg-icon v-if="scope.row.used === '1'" icon-class="enable"/>
           <i v-if="scope.row.used === '0'" class="el-icon-fa fa-stop"></i>
@@ -126,6 +126,13 @@ export default {
     this.getList()
   },
   methods: {
+    labelHead (h, {column}) {
+      if (this.list && column.property) {
+        column.minWidth = this.__columnWidth(this.list, column.property, column.label)
+        // 然后将列标题放在一个div块中，注意块的宽度一定要100%，否则表格显示不完全
+        return h('div', {style: {width: '100%'}}, [column.label])
+      }
+    },
     handleSizeChange (val) {
       this.listQuery.pageSize = val
       this.getList()

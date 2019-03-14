@@ -8,6 +8,8 @@ import i18n from '@/lang'
 import '@/styles/icon-fa.scss'
 import 'font-awesome/css/font-awesome.min.css'
 import '@/icons'
+import TableUtil from '@/utils/table'
+Vue.use(TableUtil)
 
 Vue.config.productionTip = false
 

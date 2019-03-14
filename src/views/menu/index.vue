@@ -31,11 +31,17 @@
     <el-table ref="dataTable" :data="list" v-loading="listLoading" :element-loading-text="$t('common.loadingText')" border :fit="true" highlight-current-row stripe @selection-change="handleSelectionChange" @row-click="handleRowClick" tooltip-effect="light">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column type="index" width="50" align="center" />
-      <el-table-column :label="$t('menu.name')" prop="name" align="center" />
-      <el-table-column :label="$t('menu.pMenuName')" prop="pMenuName" align="center" />
-      <el-table-column :label="$t('menu.url')" prop="url" align="center" />
-      <el-table-column :label="$t('menu.perms')" prop="perms" align="center" />
-      <el-table-column :label="$t('menu.type')" align="center">
+      <el-table-column :label="$t('menu.name')" prop="name" align="center" :render-header="labelHead"/>
+      <el-table-column :label="$t('menu.pMenuName')" prop="pMenuName" align="center" :render-header="labelHead"/>
+      <el-table-column :label="$t('menu.url')" prop="url" align="center" :render-header="labelHead"/>
+      <el-table-column :label="$t('menu.perms')" prop="perms" align="center" :render-header="labelHead">
+        <template slot-scope="scope">
+          <div class="icon-item" v-if="scope.row.perms" @click="handleClipboard(scope.row.perms,$event)">
+            <span class="disabled">{{scope.row.perms}}</span>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column :label="$t('menu.type')" align="center" prop="type">
         <template slot-scope="scope">
           <span v-if="scope.row.type === 0">
             <svg-icon icon-class="catalog" class-name="icon-lagger" />
@@ -48,7 +54,7 @@
           </span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('menu.icon')" align="center">
+      <el-table-column :label="$t('menu.icon')" align="center" prop="icon" :render-header="labelHead">
         <template slot-scope="scope">
           <div class="icon-item" v-if="scope.row.icon" @click="handleClipboard(scope.row.icon,$event)">
             <svg-icon :icon-class="scope.row.icon" class-name="disabled"/>
@@ -56,9 +62,9 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('menu.orderNum')" prop="orderNum" align="center" />
-      <el-table-column :label="$t('menu.creator')" prop="creatorName" align="center" />
-      <el-table-column :label="$t('menu.createTime')" prop="createTime" align="center" />
+      <el-table-column :label="$t('menu.orderNum')" prop="orderNum" align="center" :render-header="labelHead"/>
+      <el-table-column :label="$t('menu.creator')" prop="creatorName" align="center" :render-header="labelHead"/>
+      <el-table-column :label="$t('menu.createTime')" prop="createTime" align="center" :render-header="labelHead"/>
     </el-table>
     <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.pageNum" :page-sizes="[20,30,50,100]" :page-size="listQuery.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
     </el-pagination>
@@ -169,6 +175,13 @@ export default {
     this.getList()
   },
   methods: {
+    labelHead (h, {column}) {
+      if (this.list && column.property) {
+        column.minWidth = this.__columnWidth(this.list, column.property, column.label)
+        // 然后将列标题放在一个div块中，注意块的宽度一定要100%，否则表格显示不完全
+        return h('div', {style: {width: '100%'}}, [column.label])
+      }
+    },
     handleSizeChange (val) {
       this.listQuery.pageSize = val
       this.getList()
@@ -346,7 +359,6 @@ export default {
   }
 
   .icon-item {
-    font-size: 20px;
     color: #24292e;
     cursor: pointer;
 

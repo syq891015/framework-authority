@@ -119,6 +119,8 @@ export default {
       getUserInfo().then((response) => {
         this.menuList = response.menuTree
         Object.assign(this.userInfo, response.userInfo)
+      }).catch((e) => {
+        console.log(e)
       })
     },
     clickMenu (data) {

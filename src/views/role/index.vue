@@ -22,10 +22,10 @@
     <el-table ref="dataTable" :data="list" v-loading="listLoading" :element-loading-text="$t('common.loadingText')" border :fit="true" highlight-current-row stripe @selection-change="handleSelectionChange" @row-click="handleRowClick" tooltip-effect="light">
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column type="index" width="50" align="center" />
-      <el-table-column :label="$t('role.name')" prop="name" align="center" />
-      <el-table-column :label="$t('role.description')" prop="description" align="center" />
-      <el-table-column :label="$t('role.creator')" prop="creatorName" align="center" />
-      <el-table-column :label="$t('role.createTime')" prop="createTime" align="center" />
+      <el-table-column :label="$t('role.name')" prop="name" align="center" :render-header="labelHead"/>
+      <el-table-column :label="$t('role.description')" prop="description" align="center" :render-header="labelHead"/>
+      <el-table-column :label="$t('role.creator')" prop="creatorName" align="center" :render-header="labelHead"/>
+      <el-table-column :label="$t('role.createTime')" prop="createTime" align="center" :render-header="labelHead"/>
     </el-table>
     <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.pageNum" :page-sizes="[20,30,50,100]" :page-size="listQuery.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
     </el-pagination>
@@ -96,6 +96,13 @@ export default {
     this.getList()
   },
   methods: {
+    labelHead (h, {column}) {
+      if (this.list && column.property) {
+        column.minWidth = this.__columnWidth(this.list, column.property, column.label)
+        // 然后将列标题放在一个div块中，注意块的宽度一定要100%，否则表格显示不完全
+        return h('div', {style: {width: '100%'}}, [column.label])
+      }
+    },
     handleSizeChange (val) {
       this.listQuery.pageSize = val
       this.getList()
