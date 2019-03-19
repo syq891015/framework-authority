@@ -39,4 +39,8 @@ export default {
   .title-lagger {
     font-size: 15px;
   }
+
+  .el-menu .el-menu-item {
+    min-width: 99%;
+  }
 </style>
