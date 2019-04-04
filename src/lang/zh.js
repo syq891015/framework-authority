@@ -9,7 +9,12 @@ export default {
     genCode: '生成代码',
     loadingText: '加载中请稍后...',
     enable: '启用',
-    disable: '禁用'
+    disable: '禁用',
+    boundMenu: '绑定权限',
+    boundRole: '绑定角色',
+    save: '保存',
+    back: '返回',
+    resetPwd: '重置密码'
   },
   navbar: {
     logOut: '退出登录',
@@ -25,7 +30,8 @@ export default {
     reClickCaptcha: '看不清？点一下',
     requireUserName: '请输入用户名',
     requireCaptcha: '请输入验证码',
-    confirmLogOut: '确认退出吗?'
+    confirmLogOut: '确认退出吗?',
+    confirmDelete: '确定删除吗？删除后将无法恢复'
   },
   table: {
     tableComment: '表备注',

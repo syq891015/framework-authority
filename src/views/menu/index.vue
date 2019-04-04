@@ -75,7 +75,7 @@
         </el-form-item>
         <el-form-item :label="$t('menu.name')" prop="name">
           <el-input v-model="temp.name" clearable></el-input>
-          <el-alert title="菜单名称是必填的；长度应小于32个字符" :closable="false" />
+          <el-alert title="权限名称是必填的；长度应小于32个字符" :closable="false" />
         </el-form-item>
         <el-form-item :label="$t('menu.url')" prop="url">
           <el-input v-model="temp.url" clearable></el-input>
@@ -148,7 +148,7 @@ export default {
       dialogTitle: '',
       rules: {
         name: [
-          { required: true, message: '菜单名称是必填的', trigger: 'change' },
+          { required: true, message: '权限名称是必填的', trigger: 'change' },
           { max: 32, message: '小于32个字符', trigger: 'change' }
         ],
         url: [

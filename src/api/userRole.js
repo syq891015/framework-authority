@@ -6,7 +6,7 @@ import request from '@/utils/request'
  */
 export function fetchList (query) {
   return request({
-    url: '/sys/userRoles',
+    url: '/auth/userRoles',
     method: 'get',
     params: query
   })
@@ -18,7 +18,7 @@ export function fetchList (query) {
  */
 export function fetchUserRole (id) {
   return request({
-    url: '/sys/userRoles/' + id,
+    url: '/auth/userRoles/' + id,
     method: 'get'
   })
 }
@@ -29,7 +29,7 @@ export function fetchUserRole (id) {
  */
 export function createUserRole (data) {
   return request({
-    url: '/sys/userRoles',
+    url: '/auth/userRoles',
     method: 'post',
     data
   })
@@ -41,7 +41,7 @@ export function createUserRole (data) {
  */
 export function updateUserRole (data) {
   return request({
-    url: '/sys/userRoles/' + data.userId,
+    url: '/auth/userRoles/' + data.userId,
     method: 'put',
     data
   })
@@ -53,7 +53,7 @@ export function updateUserRole (data) {
  */
 export function deleteUserRole (id) {
   return request({
-    url: '/sys/userRoles/' + id,
+    url: '/auth/userRoles/' + id,
     method: 'delete'
   })
 }

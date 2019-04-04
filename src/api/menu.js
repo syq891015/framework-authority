@@ -6,7 +6,7 @@ import request from '@/utils/request'
  */
 export function fetchList (query) {
   return request({
-    url: '/sys/menus',
+    url: '/auth/menus',
     method: 'get',
     params: query
   })
@@ -18,7 +18,7 @@ export function fetchList (query) {
  */
 export function fetchMenu (id) {
   return request({
-    url: '/sys/menus/' + id,
+    url: '/auth/menus/' + id,
     method: 'get'
   })
 }
@@ -29,7 +29,7 @@ export function fetchMenu (id) {
  */
 export function createMenu (data) {
   return request({
-    url: '/sys/menus',
+    url: '/auth/menus',
     method: 'post',
     data
   })
@@ -41,7 +41,7 @@ export function createMenu (data) {
  */
 export function updateMenu (data) {
   return request({
-    url: '/sys/menus/' + data.id,
+    url: '/auth/menus/' + data.id,
     method: 'put',
     data
   })
@@ -53,7 +53,17 @@ export function updateMenu (data) {
  */
 export function deleteMenu (id) {
   return request({
-    url: '/sys/menus/' + id,
+    url: '/auth/menus/' + id,
     method: 'delete'
+  })
+}
+
+/**
+ * 获得所有的权限树
+ */
+export function getMenuTree () {
+  return request({
+    url: '/auth/menus/tree',
+    method: 'get'
   })
 }

@@ -6,7 +6,7 @@ import request from '@/utils/request'
  */
 export function fetchList (query) {
   return request({
-    url: '/sys/roleMenus',
+    url: '/auth/roleMenus',
     method: 'get',
     params: query
   })
@@ -18,7 +18,7 @@ export function fetchList (query) {
  */
 export function fetchRoleMenu (id) {
   return request({
-    url: '/sys/roleMenus/' + id,
+    url: '/auth/roleMenus/' + id,
     method: 'get'
   })
 }
@@ -29,7 +29,7 @@ export function fetchRoleMenu (id) {
  */
 export function createRoleMenu (data) {
   return request({
-    url: '/sys/roleMenus',
+    url: '/auth/roleMenus',
     method: 'post',
     data
   })
@@ -41,7 +41,7 @@ export function createRoleMenu (data) {
  */
 export function updateRoleMenu (data) {
   return request({
-    url: '/sys/roleMenus/' + data.roleId,
+    url: '/auth/roleMenus/' + data.roleId,
     method: 'put',
     data
   })
@@ -53,7 +53,7 @@ export function updateRoleMenu (data) {
  */
 export function deleteRoleMenu (id) {
   return request({
-    url: '/sys/roleMenus/' + id,
+    url: '/auth/roleMenus/' + id,
     method: 'delete'
   })
 }

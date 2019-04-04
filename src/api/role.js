@@ -6,7 +6,7 @@ import request from '@/utils/request'
  */
 export function fetchList (query) {
   return request({
-    url: '/sys/roles',
+    url: '/auth/roles',
     method: 'get',
     params: query
   })
@@ -18,7 +18,7 @@ export function fetchList (query) {
  */
 export function fetchRole (id) {
   return request({
-    url: '/sys/roles/' + id,
+    url: '/auth/roles/' + id,
     method: 'get'
   })
 }
@@ -29,7 +29,7 @@ export function fetchRole (id) {
  */
 export function createRole (data) {
   return request({
-    url: '/sys/roles',
+    url: '/auth/roles',
     method: 'post',
     data
   })
@@ -41,7 +41,7 @@ export function createRole (data) {
  */
 export function updateRole (data) {
   return request({
-    url: '/sys/roles/' + data.id,
+    url: '/auth/roles/' + data.id,
     method: 'put',
     data
   })
@@ -53,7 +53,31 @@ export function updateRole (data) {
  */
 export function deleteRole (id) {
   return request({
-    url: '/sys/roles/' + id,
+    url: '/auth/roles/' + id,
     method: 'delete'
+  })
+}
+
+/**
+ * 获得某个角色下的权限ID集合
+ * @param id 角色ID
+ */
+export function getMenuIdListByRoleId (id) {
+  return request({
+    url: '/auth/roles/' + id + '/menus/ids',
+    method: 'get'
+  })
+}
+
+/**
+ * 给角色绑定权限
+ * @param data {menuIds: [], roleId: 1}
+ */
+export function boundMenu (data) {
+  const { menuIds, roleId } = data
+  return request({
+    url: '/auth/roles/' + roleId + '/menus',
+    method: 'post',
+    data: { menuIds }
   })
 }

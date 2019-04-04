@@ -6,7 +6,7 @@ import request from '@/utils/request'
  */
 export function fetchList (query) {
   return request({
-    url: '/sys/users',
+    url: '/auth/users',
     method: 'get',
     params: query
   })
@@ -18,7 +18,7 @@ export function fetchList (query) {
  */
 export function fetchUser (id) {
   return request({
-    url: '/sys/users/' + id,
+    url: '/auth/users/' + id,
     method: 'get'
   })
 }
@@ -29,7 +29,7 @@ export function fetchUser (id) {
  */
 export function createUser (data) {
   return request({
-    url: '/sys/users',
+    url: '/auth/users',
     method: 'post',
     data
   })
@@ -41,7 +41,7 @@ export function createUser (data) {
  */
 export function updateUser (data) {
   return request({
-    url: '/sys/users/' + data.id,
+    url: '/auth/users/' + data.id,
     method: 'put',
     data
   })
@@ -53,7 +53,42 @@ export function updateUser (data) {
  */
 export function deleteUser (id) {
   return request({
-    url: '/sys/users/' + id,
+    url: '/auth/users/' + id,
     method: 'delete'
+  })
+}
+
+/**
+ * 获得某个用户下的角色ID集合
+ * @param id 用户ID
+ */
+export function getRoleIdListByUserId (id) {
+  return request({
+    url: '/auth/users/' + id + '/roles/ids',
+    method: 'get'
+  })
+}
+
+/**
+ * 给用户绑定角色
+ * @param data {roleIds: [], userId: 1}
+ */
+export function boundRole (data) {
+  const { roleIds, userId } = data
+  return request({
+    url: '/auth/users/' + userId + '/roles',
+    method: 'post',
+    data: { roleIds }
+  })
+}
+
+/**
+ * 给用户重置密码
+ * @param data 用户ID
+ */
+export function resetPwd (data) {
+  return request({
+    url: '/auth/users/' + data + '/resetPwd',
+    method: 'post'
   })
 }

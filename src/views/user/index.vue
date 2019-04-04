@@ -16,6 +16,8 @@
           <el-button icon="el-icon-plus" @click="handleCreate">{{$t('common.add')}}</el-button>
           <el-button icon="el-icon-edit" @click="handleUpdate">{{$t('common.edit')}}</el-button>
           <el-button icon="el-icon-delete" @click="handleDelete">{{$t('common.delete')}}</el-button>
+          <el-button icon="el-icon-delete" @click="handleBoundRole">{{$t('common.boundRole')}}</el-button>
+          <el-button icon="el-icon-delete" @click="resetPwd">{{$t('common.resetPwd')}}</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -74,10 +76,20 @@
         <el-button v-else type="primary" @click="updateData">{{$t('common.confirm')}}</el-button>
       </div>
     </el-dialog>
+    <el-dialog :close-on-click-modal="false" :title="boundTitle" :visible.sync="dialogBoundVisible">
+      <el-checkbox-group v-model="checkList">
+        <el-checkbox v-for="role in roleList" :key="role.id" :label="role.id">{{role.name}}</el-checkbox>
+      </el-checkbox-group>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogBoundVisible = false">{{$t('common.cancel')}}</el-button>
+        <el-button type="primary" @click="boundRole">{{$t('common.save')}}</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 <script>
-import { fetchList, createUser, updateUser, deleteUser } from '@/api/user'
+import { fetchList, createUser, updateUser, deleteUser, getRoleIdListByUserId, boundRole, resetPwd } from '@/api/user'
+import { fetchList as fetchAllRole } from '@/api/role'
 
 export default {
   name: 'user',
@@ -130,7 +142,12 @@ export default {
           { max: 32, message: '小于32个字符', trigger: 'change' }
         ]
       },
-      createTime: undefined
+      createTime: undefined,
+      user: undefined,
+      checkList: [],
+      roleList: [],
+      dialogBoundVisible: false,
+      boundTitle: ''
     }
   },
   created () {
@@ -281,6 +298,64 @@ export default {
             })
             this.getList()
           }
+        })
+      })
+    },
+    handleBoundRole () {
+      if (this.multipleSelection.length === 0) {
+        this.$message.warning({
+          message: '请选择一项用户！'
+        })
+        return
+      }
+      if (this.multipleSelection.length > 1) {
+        this.$message.warning({
+          message: '只能选择一项用户！'
+        })
+        return
+      }
+      this.user = this.multipleSelection[0]
+      this.boundTitle = '绑定角色 -- ' + this.user.name
+      this.dialogBoundVisible = true
+      getRoleIdListByUserId(this.user.id).then(response => {
+        this.checkList = response.data
+      })
+      fetchAllRole({}).then(response => {
+        this.roleList = response.data
+      })
+    },
+    boundRole () {
+      const checkIdAry = this.checkList
+      if (checkIdAry.length === 0) {
+        this.$message.warning({
+          message: '绑定角色不能为空!'
+        })
+        return
+      }
+      const userId = this.user.id
+      boundRole({ roleIds: checkIdAry, userId: userId }).then(() => {
+        this.dialogBoundVisible = false
+        this.$message.success({
+          message: this.user.name + '绑定角色成功!'
+        })
+      })
+    },
+    resetPwd () {
+      if (this.multipleSelection.length === 0) {
+        this.$message.warning({
+          message: '请选择一项用户！'
+        })
+        return
+      }
+      if (this.multipleSelection.length > 1) {
+        this.$message.warning({
+          message: '只能选择一项用户！'
+        })
+        return
+      }
+      resetPwd(this.multipleSelection[0].id).then(() => {
+        this.$message.success({
+          message: this.multipleSelection[0].name + '重置密码成功，重置后为默认密码!'
         })
       })
     }
