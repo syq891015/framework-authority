@@ -68,6 +68,7 @@ export default {
   role: {
     name: '角色名称',
     description: '角色描述',
+    users: '用户列表',
     creator: '创建人',
     createTime: '创建时间'
   },
@@ -86,6 +87,7 @@ export default {
     sex: '性别',
     phone: '联系电话',
     status: '状态',
+    roles: '角色列表',
     creator: '创建人',
     createTime: '创建时间',
     modifier: '修改人',

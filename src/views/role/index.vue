@@ -25,6 +25,7 @@
         <el-table-column type="index" width="50" align="center" />
         <el-table-column :label="$t('role.name')" prop="name" align="center" :render-header="labelHead"/>
         <el-table-column :label="$t('role.description')" prop="description" align="center" :render-header="labelHead"/>
+        <el-table-column :label="$t('role.users')" prop="users" align="center" :render-header="labelHead"/>
         <el-table-column :label="$t('role.creator')" prop="creatorName" align="center" :render-header="labelHead"/>
         <el-table-column :label="$t('role.createTime')" prop="createTime" align="center" :render-header="labelHead"/>
       </el-table>

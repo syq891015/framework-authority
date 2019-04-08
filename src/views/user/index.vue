@@ -39,6 +39,7 @@
           <span v-if="scope.row.status === 1">激活</span>
         </template>
       </el-table-column>
+      <el-table-column :label="$t('user.roles')" prop="roles" align="center" :render-header="labelHead"/>
       <el-table-column :label="$t('user.creator')" prop="creatorName" align="center" :render-header="labelHead"/>
       <el-table-column :label="$t('user.createTime')" prop="createTime" align="center" :render-header="labelHead"/>
       <el-table-column :label="$t('user.modifier')" prop="modifierName" align="center" :render-header="labelHead"/>
@@ -331,6 +332,7 @@ export default {
         this.$message.success({
           message: this.user.name + '绑定角色成功!'
         })
+        this.getList()
       })
     },
     resetPwd () {
