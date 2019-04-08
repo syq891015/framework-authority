@@ -52,10 +52,6 @@
           <el-input v-model="temp.account" clearable></el-input>
           <el-alert title="账号是必填的；长度应小于20个字符" :closable="false" />
         </el-form-item>
-        <el-form-item :label="$t('user.passwd')" prop="passwd">
-          <el-input v-model="temp.passwd" clearable></el-input>
-          <el-alert title="密码是必填的；长度应小于64个字符" :closable="false" />
-        </el-form-item>
         <el-form-item :label="$t('user.name')" prop="name">
           <el-input v-model="temp.name" clearable></el-input>
           <el-alert title="姓名是必填的；长度应小于64个字符" :closable="false" />
@@ -68,6 +64,9 @@
         <el-form-item :label="$t('user.phone')" prop="phone">
           <el-input v-model="temp.phone" clearable></el-input>
           <el-alert title="长度应小于32个字符" :closable="false" />
+        </el-form-item>
+        <el-form-item>
+          <i class="el-icon-info"></i>&nbsp;&nbsp;默认密码是123
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -113,7 +112,6 @@ export default {
       temp: {
         id: undefined,
         account: undefined,
-        passwd: undefined,
         name: undefined,
         sex: undefined,
         phone: undefined,
@@ -129,10 +127,6 @@ export default {
         account: [
           { required: true, message: '账号是必填的', trigger: 'change' },
           { max: 20, message: '小于20个字符', trigger: 'change' }
-        ],
-        passwd: [
-          { required: true, message: '密码是必填的', trigger: 'change' },
-          { max: 64, message: '小于64个字符', trigger: 'change' }
         ],
         name: [
           { required: true, message: '姓名是必填的', trigger: 'change' },
