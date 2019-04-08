@@ -57,9 +57,8 @@
           <el-alert title="姓名是必填的；长度应小于64个字符" :closable="false" />
         </el-form-item>
         <el-form-item :label="$t('user.sex')" prop="sex">
-          <el-select v-model="temp.sex">
-            <el-option v-for="item in [{value: 1, name: '男'}, {value: 2, name: '女'}]" :label="item.name" :key="item.value" :value="item.value"></el-option>
-          </el-select>
+          <el-radio v-model="temp.sex" :label="1">男</el-radio>
+          <el-radio v-model="temp.sex" :label="2">女</el-radio>
         </el-form-item>
         <el-form-item :label="$t('user.phone')" prop="phone">
           <el-input v-model="temp.phone" clearable></el-input>

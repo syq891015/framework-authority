@@ -86,9 +86,9 @@
           <el-alert title="长度应小于512个字符" :closable="false" />
         </el-form-item>
         <el-form-item :label="$t('menu.type')" prop="type">
-          <el-select v-model="temp.type">
-            <el-option v-for="(item, index) in ['目录', '菜单', '功能']" :label="item" :key="index" :value="index"></el-option>
-          </el-select>
+          <el-radio v-model="temp.type" :label="0">目录</el-radio>
+          <el-radio v-model="temp.type" :label="1">菜单</el-radio>
+          <el-radio v-model="temp.type" :label="2">功能</el-radio>
         </el-form-item>
         <el-form-item :label="$t('menu.icon')" prop="icon">
           <el-input v-model="temp.icon" clearable></el-input>
