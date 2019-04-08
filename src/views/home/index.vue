@@ -17,6 +17,12 @@
           <screenfull class="screenfull"></screenfull>
         </el-tooltip>
 
+        <el-tooltip effect="light" :content="$t('navbar.updatePwd')" placement="bottom">
+          <span @click="handleUpdatePwd">
+            <svg-icon class="tool" icon-class="updatePwd"></svg-icon>
+          </span>
+        </el-tooltip>
+
         <lockscreen v-if="locked">
           <div class="lockScreen-div">
             <div class="unlock-container">
@@ -52,6 +58,24 @@
     <el-col class="center" :span="collapsed ? 23 : 21">
       <iframe frameborder="0" :src="menuUrl" style="width: 100%; height: 100%;"></iframe>
     </el-col>
+
+    <el-dialog :close-on-click-modal="false" :title="dialogTitle" :visible.sync="dialogFormVisible">
+      <el-form :rules="rules" ref="updPwdForm" :model="updPwd" label-position="right" label-width="120px" style='width: 90%;'>
+        <el-form-item :label="$t('updPwd.oldPasswd')" prop="oldPasswd">
+          <el-input type="password" v-model="updPwd.oldPasswd" clearable></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('updPwd.passwd')" prop="passwd">
+          <el-input type="password" v-model="updPwd.passwd" clearable></el-input>
+        </el-form-item>
+        <el-form-item :label="$t('updPwd.confirmPwd')" prop="confirmPwd">
+          <el-input type="password" v-model="updPwd.confirmPwd" clearable></el-input>
+        </el-form-item>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">{{$t('common.cancel')}}</el-button>
+        <el-button type="primary" @click="updatePwd">{{$t('common.edit')}}</el-button>
+      </div>
+    </el-dialog>
   </el-row>
 </template>
 <script>
@@ -60,6 +84,7 @@ import Screenfull from '@/components/Screenfull'
 import lockscreen from 'vue-lockscreen'
 import { getToken, removeToken, setCookie, removeCookie, getCookie } from '@/utils/cookie'
 import { logout, getUserInfo, unlock } from '@/api/login'
+import { updatePwd } from '@/api/user'
 
 export default {
   components: {
@@ -68,6 +93,13 @@ export default {
     lockscreen
   },
   data () {
+    const validNewPwd = (rule, value, callback) => {
+      if (this.updPwd.passwd !== value) {
+        callback(new Error('两次密码不一样'))
+      } else {
+        callback()
+      }
+    }
     return {
       collapsed: false,
       locked: false,
@@ -79,7 +111,27 @@ export default {
       week: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
       date: undefined,
       time: undefined,
-      password: undefined
+      password: undefined,
+      dialogTitle: '',
+      dialogFormVisible: false,
+      updPwd: {
+        oldPasswd: undefined,
+        passwd: undefined,
+        confirmPwd: undefined
+      },
+      rules: {
+        oldPasswd: [
+          { required: true, message: '请填写原密码', trigger: 'change' }
+        ],
+        passwd: [
+          { required: true, message: '请填写密码', trigger: 'change' },
+          { max: 64, message: '小于64个字符', trigger: 'change' }
+        ],
+        confirmPwd: [
+          { required: true, message: '请确认密码', trigger: 'change' },
+          { validator: validNewPwd, trigger: 'blur' }
+        ]
+      }
     }
   },
   methods: {
@@ -113,6 +165,32 @@ export default {
         }).catch((response) => {
           console.log(response.msg)
         })
+      })
+    },
+    handleUpdatePwd () {
+      this.updPwd = {
+        oldPasswd: undefined,
+        passwd: undefined,
+        confirmPwd: undefined
+      }
+      this.dialogFormVisible = true
+      this.dialogTitle = this.$t('navbar.updatePwd')
+      this.$nextTick(() => {
+        this.$refs.updPwdForm.clearValidate()
+      })
+    },
+    updatePwd () {
+      const fm = this.$refs.updPwdForm
+      fm.validate(valid => {
+        console.log(valid)
+        if (valid) {
+          updatePwd(this.updPwd).then(() => {
+            this.dialogFormVisible = false
+            this.$message.success({
+              message: '修改成功！'
+            })
+          })
+        }
       })
     },
     getUserInfo () {
@@ -261,5 +339,8 @@ export default {
         }
       }
     }
+  }
+  .el-dialog {
+    width: 550px;
   }
 </style>

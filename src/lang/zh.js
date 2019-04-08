@@ -98,5 +98,10 @@ export default {
     username: '账号',
     password: '密码',
     captcha: '验证码'
+  },
+  updPwd: {
+    oldPasswd: '原密码',
+    passwd: '新密码',
+    confirmPwd: '确认密码'
   }
 }

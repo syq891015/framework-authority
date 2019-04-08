@@ -92,3 +92,16 @@ export function resetPwd (data) {
     method: 'post'
   })
 }
+
+/**
+ * 修改个人密码
+ * @param data {oldPasswd, passwd}
+ */
+export function updatePwd (data) {
+  console.log(data)
+  return request({
+    url: '/auth/users/updatePwd',
+    method: 'post',
+    data
+  })
+}
