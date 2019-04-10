@@ -13,11 +13,11 @@
         </el-form-item>
         <el-form-item>
           <el-button icon="el-icon-search" @click="handleFilter">{{$t('common.search')}}</el-button>
-          <el-button icon="el-icon-plus" @click="handleCreate">{{$t('common.add')}}</el-button>
-          <el-button icon="el-icon-edit" @click="handleUpdate">{{$t('common.edit')}}</el-button>
-          <el-button icon="el-icon-delete" @click="handleDelete">{{$t('common.delete')}}</el-button>
-          <el-button icon="el-icon-delete" @click="handleBoundRole">{{$t('common.boundRole')}}</el-button>
-          <el-button icon="el-icon-delete" @click="resetPwd">{{$t('common.resetPwd')}}</el-button>
+          <el-button icon="el-icon-plus" v-if="hasPermission('auth:user:add')" @click="handleCreate">{{$t('common.add')}}</el-button>
+          <el-button icon="el-icon-edit"  v-if="hasPermission('auth:user:update')" @click="handleUpdate">{{$t('common.edit')}}</el-button>
+          <el-button icon="el-icon-delete" v-if="hasPermission('auth:user:delete')" @click="handleDelete">{{$t('common.delete')}}</el-button>
+          <el-button icon="el-icon-fa fa-users"  v-if="hasPermission('auth:user:boundRole')" @click="handleBoundRole">{{$t('common.boundRole')}}</el-button>
+          <el-button icon="el-icon-fa fa-recycle"  v-if="hasPermission('auth:user:resetPwd')" @click="resetPwd">{{$t('common.resetPwd')}}</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -47,6 +47,7 @@
     </el-table>
     <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.pageNum" :page-sizes="[20,30,50,100]" :page-size="listQuery.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
     </el-pagination>
+
     <el-dialog :close-on-click-modal="false" :title="dialogTitle" :visible.sync="dialogFormVisible" class="help-info">
       <el-form :rules="rules" ref="dataForm" :model="temp" label-position="right" label-width="120px" style='width: 90%;'>
         <el-form-item :label="$t('user.account')" prop="account">
@@ -75,6 +76,7 @@
         <el-button v-else type="primary" @click="updateData">{{$t('common.confirm')}}</el-button>
       </div>
     </el-dialog>
+
     <el-dialog :close-on-click-modal="false" :title="boundTitle" :visible.sync="dialogBoundVisible">
       <el-checkbox-group v-model="checkList">
         <el-checkbox v-for="role in roleList" :key="role.id" :label="role.id">{{role.name}}</el-checkbox>
@@ -89,6 +91,7 @@
 <script>
 import { fetchList, createUser, updateUser, deleteUser, getRoleIdListByUserId, boundRole, resetPwd } from '@/api/user'
 import { fetchList as fetchAllRole } from '@/api/role'
+import { hasPermission } from '@/utils/permission'
 
 export default {
   name: 'user',
@@ -151,6 +154,7 @@ export default {
     this.getList()
   },
   methods: {
+    hasPermission,
     labelHead (h, {column}) {
       if (this.list && column.property) {
         column.minWidth = this.__columnWidth(this.list, column.property, column.label)
@@ -359,6 +363,19 @@ export default {
 
 </script>
 
-<style>
+<style lang="less">
   @import "../../styles/content.less";
+  .batch-dialog .el-dialog {
+    width: 57%;
+    .el-row {
+      margin-bottom: 8px;
+      .el-col {
+        text-align: center;
+        padding: 5px;
+      }
+      .header-required {
+        color: red;
+      }
+    }
+  }
 </style>

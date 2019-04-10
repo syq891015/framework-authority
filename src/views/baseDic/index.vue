@@ -13,9 +13,9 @@
         </el-form-item>
         <el-form-item>
           <el-button icon="el-icon-search" @click="handleFilter">{{$t('common.search')}}</el-button>
-          <el-button icon="el-icon-plus" @click="handleCreate">{{$t('common.add')}}</el-button>
-          <el-button icon="el-icon-edit" @click="handleUpdate">{{$t('common.edit')}}</el-button>
-          <el-button icon="el-icon-delete" @click="handleDelete">{{$t('common.delete')}}</el-button>
+          <el-button icon="el-icon-plus" v-if="hasPermission('sys:baseDic:add')" @click="handleCreate">{{$t('common.add')}}</el-button>
+          <el-button icon="el-icon-edit" v-if="hasPermission('sys:baseDic:update')" @click="handleUpdate">{{$t('common.edit')}}</el-button>
+          <el-button icon="el-icon-delete" v-if="hasPermission('sys:baseDic:delete')" @click="handleDelete">{{$t('common.delete')}}</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -59,6 +59,7 @@
 <script>
 import { fetchList, createBaseDic, updateBaseDic, deleteBaseDic } from '@/api/baseDic'
 import clipboard from '@/utils/clipboard'
+import { hasPermission } from '@/utils/permission'
 
 export default {
   name: 'baseDic',
@@ -111,6 +112,7 @@ export default {
     this.getList()
   },
   methods: {
+    hasPermission,
     labelHead (h, {column}) {
       if (this.list && column.property) {
         column.minWidth = this.__columnWidth(this.list, column.property, column.label)

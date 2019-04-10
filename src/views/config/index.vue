@@ -13,11 +13,11 @@
         </el-form-item>
         <el-form-item>
           <el-button icon="el-icon-search" @click="handleFilter">{{$t('common.search')}}</el-button>
-          <el-button icon="el-icon-plus" @click="handleCreate">{{$t('common.add')}}</el-button>
-          <el-button icon="el-icon-edit" @click="handleUpdate">{{$t('common.edit')}}</el-button>
-          <el-button icon="el-icon-delete" @click="handleDelete">{{$t('common.delete')}}</el-button>
-          <el-button @click="handleEnable"><svg-icon icon-class="enable"/>{{$t('common.enable')}}</el-button>
-          <el-button icon="el-icon-fa fa-stop" @click="handleDisable">{{$t('common.disable')}}</el-button>
+          <el-button icon="el-icon-plus" v-if="hasPermission('sys:config:add')" @click="handleCreate">{{$t('common.add')}}</el-button>
+          <el-button icon="el-icon-edit" v-if="hasPermission('sys:config:update')" @click="handleUpdate">{{$t('common.edit')}}</el-button>
+          <el-button icon="el-icon-delete" v-if="hasPermission('sys:config:delete')" @click="handleDelete">{{$t('common.delete')}}</el-button>
+          <el-button @click="handleEnable" v-if="hasPermission('sys:config:enable')"><svg-icon icon-class="enable"/>{{$t('common.enable')}}</el-button>
+          <el-button icon="el-icon-fa fa-stop" v-if="hasPermission('sys:config:disable')" @click="handleDisable">{{$t('common.disable')}}</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -66,6 +66,7 @@
 <script>
 import { fetchList, createConfig, updateConfig, deleteConfig, enable, disable } from '@/api/config'
 import clipboard from '@/utils/clipboard'
+import { hasPermission } from '@/utils/permission'
 
 export default {
   name: 'config',
@@ -115,6 +116,7 @@ export default {
     this.getList()
   },
   methods: {
+    hasPermission,
     labelHead (h, {column}) {
       if (this.list && column.property) {
         column.minWidth = this.__columnWidth(this.list, column.property, column.label)

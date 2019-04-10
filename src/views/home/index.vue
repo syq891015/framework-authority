@@ -85,6 +85,7 @@ import lockscreen from 'vue-lockscreen'
 import { getToken, removeToken, setCookie, removeCookie, getCookie } from '@/utils/cookie'
 import { logout, getUserInfo, unlock } from '@/api/login'
 import { updatePwd } from '@/api/user'
+import { setUserPerms, removeUserPerms } from '@/utils/permission'
 
 export default {
   components: {
@@ -160,6 +161,7 @@ export default {
     logout () {
       this.__confirm({message: 'tips.confirmLogOut'}).then(() => {
         logout().then(() => {
+          removeUserPerms()
           removeToken()
           location.href = 'login.html'
         }).catch((response) => {
@@ -197,6 +199,7 @@ export default {
       getUserInfo().then((response) => {
         this.menuList = response.menuTree
         Object.assign(this.userInfo, response.userInfo)
+        setUserPerms(response.perms)
       }).catch((e) => {
         console.log(e)
       })

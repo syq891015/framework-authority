@@ -14,7 +14,8 @@ export default {
     boundRole: '绑定角色',
     save: '保存',
     back: '返回',
-    resetPwd: '重置密码'
+    resetPwd: '重置密码',
+    batchAdd: '批量添加'
   },
   navbar: {
     logOut: '退出登录',
