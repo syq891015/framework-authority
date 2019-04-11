@@ -15,7 +15,12 @@ export default {
     save: '保存',
     back: '返回',
     resetPwd: '重置密码',
-    batchAdd: '批量添加'
+    batchAdd: '批量添加',
+    upload: '上传文件',
+    reUpload: '重新上传',
+    download: '下载',
+    actions: '操作',
+    refresh: '刷新'
   },
   navbar: {
     logOut: '退出登录',
@@ -41,9 +46,9 @@ export default {
     createTime: '创建时间'
   },
   baseDic: {
-    name: '字典大类名称（中文名称）',
-    code: '字典大类编码',
-    description: '字典大类描述',
+    name: '字典目录名称（中文名称）',
+    code: '字典目录编码',
+    description: '字典目录描述',
     createTime: '创建时间',
     visibility: '是否可见'
   },
@@ -61,7 +66,7 @@ export default {
     type: '权限类型',
     icon: '图标',
     orderNum: '排序号',
-    creator: '创建人',
+    creator: '创建',
     createTime: '创建时间',
     pMenuName: '上级权限',
     topMenu: '顶级权限'
@@ -70,16 +75,16 @@ export default {
     name: '角色名称',
     description: '角色描述',
     users: '用户列表',
-    creator: '创建人',
+    creator: '创建',
     createTime: '创建时间'
   },
   dic: {
-    baseId: '字典大类',
+    baseId: '字典目录',
     name: '字典名称',
     val: '字典编码',
     used: '启用标志',
-    baseName: '字典大类名称',
-    baseCode: '字典大类编码'
+    baseName: '字典目录名称',
+    baseCode: '字典目录编码'
   },
   user: {
     account: '账号',
@@ -89,9 +94,9 @@ export default {
     phone: '联系电话',
     status: '状态',
     roles: '角色列表',
-    creator: '创建人',
+    creator: '创建',
     createTime: '创建时间',
-    modifier: '修改人',
+    modifier: '修改',
     modifyTime: '修改时间',
     deleted: '删除标志'
   },
@@ -106,5 +111,22 @@ export default {
     oldPasswd: '原密码',
     passwd: '新密码',
     confirmPwd: '确认密码'
+  },
+  file: {
+    id: 'ID',
+    fileName: '文件名',
+    origFileName: '原始文件名',
+    dir: '文件夹',
+    fileSize: '文件大小',
+    fileType: '文件类型',
+    fileExtension: '文件扩展名',
+    createTime: '上传时间',
+    creator: '上传',
+    modifier: '重传',
+    modifyTime: '重传时间',
+    comment: '备注'
+  },
+  cache: {
+    name: '缓存名称'
   }
 }

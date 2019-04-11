@@ -37,11 +37,11 @@
       <el-form :rules="rules" ref="dataForm" :model="temp" label-position="right" label-width="120px" style='width: 90%;'>
         <el-form-item :label="$t('baseDic.name')" prop="name">
           <el-input v-model="temp.name" clearable></el-input>
-          <el-alert title="字典大类名称（中文名称）是必填的；长度应小于50个字符" :closable="false" />
+          <el-alert title="字典目录名称（中文名称）是必填的；长度应小于50个字符" :closable="false" />
         </el-form-item>
         <el-form-item :label="$t('baseDic.code')" prop="code">
           <el-input v-model="temp.code" clearable></el-input>
-          <el-alert title="字典大类代码是必填的；长度应小于50个字符" :closable="false" />
+          <el-alert title="字典目录代码是必填的；长度应小于50个字符" :closable="false" />
         </el-form-item>
         <el-form-item :label="$t('baseDic.description')" prop="description">
           <el-input v-model="temp.description" clearable></el-input>
@@ -65,7 +65,6 @@ export default {
   name: 'baseDic',
   data () {
     return {
-      tableKey: 0, // 用于table结构改变时使用，此时无用
       list: null,
       total: null,
       listLoading: true,
@@ -91,11 +90,11 @@ export default {
       dialogTitle: '',
       rules: {
         name: [
-          { required: true, message: '字典大类名称（中文名称）是必填的', trigger: 'change' },
+          { required: true, message: '字典目录名称（中文名称）是必填的', trigger: 'change' },
           { max: 50, message: '小于50个字符', trigger: 'change' }
         ],
         code: [
-          { required: true, message: '字典大类代码是必填的', trigger: 'change' },
+          { required: true, message: '字典目录代码是必填的', trigger: 'change' },
           { max: 50, message: '小于50个字符', trigger: 'change' }
         ],
         description: [
@@ -114,7 +113,7 @@ export default {
   methods: {
     hasPermission,
     labelHead (h, {column}) {
-      if (this.list && column.property) {
+      if (this.list && this.list.length > 0 && column.property) {
         column.minWidth = this.__columnWidth(this.list, column.property, column.label)
         // 然后将列标题放在一个div块中，注意块的宽度一定要100%，否则表格显示不完全
         return h('div', {style: {width: '100%'}}, [column.label])
@@ -196,13 +195,13 @@ export default {
     handleUpdate () {
       if (this.multipleSelection.length === 0) {
         this.$message.warning({
-          message: '请选择一项字典大类！'
+          message: '请选择一项字典目录！'
         })
         return
       }
       if (this.multipleSelection.length > 1) {
         this.$message.warning({
-          message: '只能选择一项字典大类！'
+          message: '只能选择一项字典目录！'
         })
         return
       }
@@ -232,13 +231,13 @@ export default {
     handleDelete () {
       if (this.multipleSelection.length === 0) {
         this.$message.warning({
-          message: '请选择一项字典大类！'
+          message: '请选择一项字典目录！'
         })
         return
       }
       if (this.multipleSelection.length > 1) {
         this.$message.warning({
-          message: '只能选择一项字典大类！'
+          message: '只能选择一项字典目录！'
         })
         return
       }

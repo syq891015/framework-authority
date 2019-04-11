@@ -97,7 +97,6 @@ export default {
   name: 'user',
   data () {
     return {
-      tableKey: 0, // 用于table结构改变时使用，此时无用
       list: null,
       total: null,
       listLoading: true,
@@ -156,7 +155,7 @@ export default {
   methods: {
     hasPermission,
     labelHead (h, {column}) {
-      if (this.list && column.property) {
+      if (this.list && this.list.length > 0 && column.property) {
         column.minWidth = this.__columnWidth(this.list, column.property, column.label)
         // 然后将列标题放在一个div块中，注意块的宽度一定要100%，否则表格显示不完全
         return h('div', {style: {width: '100%'}}, [column.label])
