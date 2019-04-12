@@ -3,7 +3,7 @@
     <el-col :span="24" class="toolbar" style="padding-bottom: 0;">
       <el-form :inline="true" label-position="left">
         <el-form-item>
-          <el-button icon="el-icon-refresh" v-if="hasPermission('sys:cache:refresh')" @click="batchRefresh">
+          <el-button icon="el-icon-refresh" type="primary" v-if="hasPermission('sys:cache:refresh')" @click="batchRefresh">
             {{$t('common.refresh')}}
           </el-button>
         </el-form-item>
@@ -17,7 +17,7 @@
       <el-table-column :label="$t('cache.name')" prop="name" align="center"/>
       <el-table-column align="center" :label="$t('common.actions')">
         <template slot-scope="scope">
-          <el-button v-if="hasPermission('sys:cache:refresh')" @click="refresh(scope.row.serviceName)">{{$t('common.refresh')}}</el-button>
+          <el-button type="primary" v-if="hasPermission('sys:cache:refresh')" @click="refresh(scope.row.serviceName)">{{$t('common.refresh')}}</el-button>
         </template>
       </el-table-column>
     </el-table>

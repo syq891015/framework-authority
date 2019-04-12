@@ -21,10 +21,10 @@
           <el-checkbox v-model="listQuery.pMenuId" :true-label="0" :false-label="1"></el-checkbox>
         </el-form-item>
         <el-form-item>
-          <el-button icon="el-icon-search" @click="handleFilter">{{$t('common.search')}}</el-button>
-          <el-button icon="el-icon-plus" v-if="hasPermission('auth:menu:add')" @click="handleCreate">{{$t('common.add')}}</el-button>
-          <el-button icon="el-icon-edit" v-if="hasPermission('auth:menu:update')" @click="handleUpdate">{{$t('common.edit')}}</el-button>
-          <el-button icon="el-icon-delete" v-if="hasPermission('auth:menu:delete')" @click="handleDelete">{{$t('common.delete')}}</el-button>
+          <el-button icon="el-icon-search" type="primary" @click="handleFilter">{{$t('common.search')}}</el-button>
+          <el-button icon="el-icon-plus" type="primary" v-if="hasPermission('auth:menu:add')" @click="handleCreate">{{$t('common.add')}}</el-button>
+          <el-button icon="el-icon-edit" type="primary" v-if="hasPermission('auth:menu:update')" @click="handleUpdate">{{$t('common.edit')}}</el-button>
+          <el-button icon="el-icon-delete" type="danger" v-if="hasPermission('auth:menu:delete')" @click="handleDelete">{{$t('common.delete')}}</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -66,7 +66,7 @@
       <el-table-column :label="$t('menu.creator')" prop="creatorName" align="center" :render-header="labelHead"/>
       <el-table-column :label="$t('menu.createTime')" prop="createTime" align="center" :render-header="labelHead"/>
     </el-table>
-    <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.pageNum" :page-sizes="[20,30,50,100]" :page-size="listQuery.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
+    <el-pagination class="toolbar" background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.pageNum" :page-sizes="[20,30,50,100]" :page-size="listQuery.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
     </el-pagination>
     <el-dialog :close-on-click-modal="false" :title="dialogTitle" :visible.sync="dialogFormVisible" class="help-info">
       <el-form :rules="rules" ref="dataForm" :model="temp" label-position="right" label-width="120px" style='width: 90%;'>

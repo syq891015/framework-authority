@@ -4,7 +4,7 @@
       <el-submenu :key="value.id" :index="value.id + ''" v-if="value.children && value.children.length > 0">
         <template slot="title">
           <svg-icon :icon-class="value.icon" class="icon-lagger"/>
-          <span slot="title" class="title-lagger">{{value.name}}</span>
+          <span slot="title" class="title-lagger" v-show="!collapsed">{{value.name}}</span>
         </template>
         <MenuTree :menuData="value.children" @clickMenu="clickMenu"></MenuTree>
       </el-submenu>
@@ -20,7 +20,7 @@
 import '@/icons'
 
 export default {
-  props: ['menuData'],
+  props: ['menuData', 'collapsed'],
   name: 'MenuTree',
   methods: {
     handleClick (data) {

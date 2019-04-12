@@ -12,12 +12,12 @@
           <el-date-picker v-model="createTime" type="datetimerange" unlink-panels range-separator="-" start-placeholder="起" end-placeholder="止" value-format="yyyy-MM-dd HH:mm:ss" />
         </el-form-item>
         <el-form-item>
-          <el-button icon="el-icon-search" @click="handleFilter">{{$t('common.search')}}</el-button>
-          <el-button icon="el-icon-plus" v-if="hasPermission('auth:user:add')" @click="handleCreate">{{$t('common.add')}}</el-button>
-          <el-button icon="el-icon-edit"  v-if="hasPermission('auth:user:update')" @click="handleUpdate">{{$t('common.edit')}}</el-button>
-          <el-button icon="el-icon-delete" v-if="hasPermission('auth:user:delete')" @click="handleDelete">{{$t('common.delete')}}</el-button>
-          <el-button icon="el-icon-fa fa-users"  v-if="hasPermission('auth:user:boundRole')" @click="handleBoundRole">{{$t('common.boundRole')}}</el-button>
-          <el-button icon="el-icon-fa fa-recycle"  v-if="hasPermission('auth:user:resetPwd')" @click="resetPwd">{{$t('common.resetPwd')}}</el-button>
+          <el-button icon="el-icon-search" type="primary" @click="handleFilter">{{$t('common.search')}}</el-button>
+          <el-button icon="el-icon-plus" type="primary" v-if="hasPermission('auth:user:add')" @click="handleCreate">{{$t('common.add')}}</el-button>
+          <el-button icon="el-icon-edit" type="primary"  v-if="hasPermission('auth:user:update')" @click="handleUpdate">{{$t('common.edit')}}</el-button>
+          <el-button icon="el-icon-fa fa-users" type="primary" v-if="hasPermission('auth:user:boundRole')" @click="handleBoundRole">{{$t('common.boundRole')}}</el-button>
+          <el-button icon="el-icon-delete" type="danger" v-if="hasPermission('auth:user:delete')" @click="handleDelete">{{$t('common.delete')}}</el-button>
+          <el-button icon="el-icon-fa fa-recycle" type="danger" v-if="hasPermission('auth:user:resetPwd')" @click="resetPwd">{{$t('common.resetPwd')}}</el-button>
         </el-form-item>
       </el-form>
     </el-col>
@@ -45,7 +45,7 @@
       <el-table-column :label="$t('user.modifier')" prop="modifierName" align="center" :render-header="labelHead"/>
       <el-table-column :label="$t('user.modifyTime')" prop="modifyTime" align="center" :render-header="labelHead"/>
     </el-table>
-    <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.pageNum" :page-sizes="[20,30,50,100]" :page-size="listQuery.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
+    <el-pagination class="toolbar" background @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="listQuery.pageNum" :page-sizes="[20,30,50,100]" :page-size="listQuery.pageSize" layout="total, sizes, prev, pager, next, jumper" :total="total">
     </el-pagination>
 
     <el-dialog :close-on-click-modal="false" :title="dialogTitle" :visible.sync="dialogFormVisible" class="help-info">

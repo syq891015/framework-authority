@@ -1,6 +1,6 @@
 <template>
   <el-row class="container">
-    <el-col class="header" :span="collapsed ? 1 : 3">
+    <el-col class="header" :span="collapsed ? 1 : 3" style="min-width: 60px;">
       <div class="logo">
         {{collapsed ? 'A':'Admin'}}
       </div>
@@ -50,9 +50,9 @@
         </div>
       </div>
     </el-col>
-    <el-col class="center" :span="collapsed ? 1 : 3">
+    <el-col class="center" :span="collapsed ? 1 : 3" style="min-width: 60px;">
       <el-menu :collapse="collapsed">
-        <MenuTree :menuData="this.menuList" @clickMenu="clickMenu"/>
+        <MenuTree :menuData="this.menuList" :collapsed="collapsed" @clickMenu="clickMenu"/>
       </el-menu>
     </el-col>
     <el-col class="center" :span="collapsed ? 23 : 21">
@@ -331,14 +331,14 @@ export default {
       bottom: 0;
       height: 94%;
       .el-menu {
-        width: 99%;
+        width: 100%;
         height: 100%;
         background-color: #eef1f6;
-        .el-menu-item {
-          background-color: white;
+        .el-submenu .el-menu {
+          background-color: #e4e8f1;
         }
         .el-menu-item:hover {
-          background-color: rgb(236, 245, 255);
+          background-color: #d1dbe5;
         }
       }
     }

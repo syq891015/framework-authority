@@ -30,17 +30,17 @@
                     @clear="listQuery.comment = undefined"/>
         </el-form-item>
         <el-form-item>
-          <el-button icon="el-icon-search" @click="handleFilter">{{$t('common.search')}}</el-button>
-          <el-button icon="el-icon-upload" v-if="hasPermission('sys:file:upload')" @click="handleUpload">
+          <el-button icon="el-icon-search" type="primary" @click="handleFilter">{{$t('common.search')}}</el-button>
+          <el-button icon="el-icon-upload" type="primary" v-if="hasPermission('sys:file:upload')" @click="handleUpload">
             {{$t('common.upload')}}
           </el-button>
-          <el-button icon="el-icon-upload" v-if="hasPermission('sys:file:reUpload')" @click="handleReUpload">
+          <el-button icon="el-icon-upload" type="primary" v-if="hasPermission('sys:file:reUpload')" @click="handleReUpload">
             {{$t('common.reUpload')}}
           </el-button>
-          <el-button icon="el-icon-download" @click="download">
+          <el-button icon="el-icon-download" type="primary" @click="download">
             {{$t('common.download')}}
           </el-button>
-          <el-button icon="el-icon-delete" v-if="hasPermission('sys:file:delete')" @click="handleDelete">
+          <el-button icon="el-icon-delete" type="danger" v-if="hasPermission('sys:file:delete')" @click="handleDelete">
             {{$t('common.delete')}}
           </el-button>
         </el-form-item>
@@ -50,7 +50,7 @@
               border :fit="true" highlight-current-row stripe @selection-change="handleSelectionChange"
               @row-click="handleRowClick" tooltip-effect="light">
       <el-table-column type="selection" width="55" align="center"/>
-      <el-table-column type="index" width="50" align="center"/>
+      <el-table-column type="index" width="55" align="center"/>
       <el-table-column :label="$t('file.id')" prop="id" align="center" :render-header="labelHead">
         <template slot-scope="scope">
           <span style="cursor: pointer;" @click="handleClipboard(scope.row.id,$event)">{{scope.row.id}}</span>
@@ -90,7 +90,7 @@
       <el-table-column :label="$t('file.modifyTime')" prop="modifyTime" align="center" :render-header="labelHead"/>
       <el-table-column :label="$t('file.modifier')" prop="modifierName" align="center" :render-header="labelHead"/>
     </el-table>
-    <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange"
+    <el-pagination class="toolbar" background @size-change="handleSizeChange" @current-change="handleCurrentChange"
                    :current-page="listQuery.pageNum" :page-sizes="[20,30,50,100]" :page-size="listQuery.pageSize"
                    layout="total, sizes, prev, pager, next, jumper" :total="total">
     </el-pagination>
@@ -103,8 +103,6 @@
         :multiple="multiple"
         :action="uploadPath"
         :file-list="fileList"
-        :on-preview="handlePreview"
-        :on-remove="handleRemove"
         :auto-upload="false"
         :with-credentials="true"
         :on-success="uploadSuccess">
@@ -271,12 +269,6 @@ export default {
     },
     submitUpload () {
       this.$refs.upload.submit()
-    },
-    handleRemove (file, fileList) {
-      console.log(file, fileList)
-    },
-    handlePreview (file) {
-      console.log(file)
     },
     uploadSuccess (response, file, fileList) {
       if (response.code !== 0) {
