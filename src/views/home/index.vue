@@ -228,7 +228,9 @@ export default {
   created () {
     this.locked = this.isLocked()
     setInterval(this.updateTime, 1000)
-    this.getUserInfo()
+    if (getToken()) {
+      this.getUserInfo()
+    }
   }
 }
 </script>

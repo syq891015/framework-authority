@@ -14,9 +14,9 @@ export function removeUserPerms () {
 
 export function hasPermission (perm) {
   const userPerms = getUserPerms()
-  if (perm && userPerms.length > 0) {
+  if (perm && userPerms && userPerms.length > 0) {
     return userPerms.some(accessPerm => perm.indexOf(accessPerm) >= 0)
   } else {
-    return false
+    return true
   }
 }
